@@ -9,29 +9,32 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    // MARK: Properties
 
     @IBOutlet weak var OutputAmount: UILabel!
     @IBOutlet weak var InputAmount: UITextField!
     @IBOutlet weak var YearPast: UITextField!
     
     @IBAction func SubmitButton(sender: AnyObject) {
-        OutputAmount.text = InputAmount.text
+        let amount = (InputAmount.text! as NSString).doubleValue
+        let year = (YearPast.text! as NSString).integerValue
         
-        print("touched all up inside it")
-        print(InputAmount.text)
-        print(YearPast.text)
+        let inflatedAmount = inflate(amount, year: year)
+        
+        print(amount, year, inflatedAmount)
+        
+        OutputAmount.text = String(inflatedAmount)
     }
+    
+    // MARK: Methods
    
-    override func viewDidLoad() {
+     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func inflate(amount: Double, year: Int) -> Double {
+        return amount * 12;
     }
-
-
 }
 
