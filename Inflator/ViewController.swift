@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var InputAmount: UITextField!
     @IBOutlet weak var YearPast: UITextField!
     
-    var YearCurrent = 2015
+    let formatter = NSNumberFormatter()
+    let YearCurrent = 2015
     
     // MARK: Methods
     
@@ -33,7 +34,9 @@ class ViewController: UIViewController {
             return
         }
         
-        OutputAmount.text = String(inflatedAmountForYear)
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        
+        OutputAmount.text = formatter.stringFromNumber(inflatedAmountForYear)
     }
     
      override func viewDidLoad() {
