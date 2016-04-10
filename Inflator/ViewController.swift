@@ -21,7 +21,10 @@ class ViewController: UIViewController {
         let year = (YearPast.text! as NSString).integerValue
         
         guard let inflatedAmountForYear = inflate(amount, fromYear: year) else {
-            print("invalid YearPast", year)
+            let alertController = UIAlertController(title: "Invalid Year", message:
+                "Invalid year, must be from 1800-2015", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
             
             return
         }
