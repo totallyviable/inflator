@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var InputAmount: UITextField!
     @IBOutlet weak var YearPast: UITextField!
     
+    var YearCurrent = 2015
+    
+    // MARK: Methods
+    
     @IBAction func SubmitButton(sender: AnyObject) {
         let amount = (InputAmount.text! as NSString).doubleValue
         let year = (YearPast.text! as NSString).integerValue
@@ -32,12 +36,10 @@ class ViewController: UIViewController {
         OutputAmount.text = String(inflatedAmountForYear)
     }
     
-    // MARK: Methods
-   
      override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     func cpiForYear(year: Int) -> Double? {
         // https://www.minneapolisfed.org/community/teaching-aids/cpi-calculator-information/consumer-price-index-1800
         
@@ -268,12 +270,16 @@ class ViewController: UIViewController {
         return cpi[year];
     }
     
-    func inflate(amount: Double, fromYear: Int) -> Double? {
-        guard let cpi = cpiForYear(fromYear) else {
+    func inflate(amountPast: Double, fromYear: Int) -> Double? {
+        guard let cpiPast = cpiForYear(fromYear) else {
             return nil
         }
         
-        return amount * cpi;
+        guard let cpiCurrent = cpiForYear(YearCurrent) else {
+            return nil
+        }
+        
+        return amountPast * (cpiCurrent / cpiPast)
     }
 }
 
