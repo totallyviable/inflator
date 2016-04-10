@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var YearPast: UITextField!
     
     let formatter = NSNumberFormatter()
-    let YearCurrent = 2015
+    let YearMinimum = 1800
+    let YearCurrent = 2016
     
     // MARK: Methods
     
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
         
         guard let inflatedAmountForYear = inflate(amount, fromYear: year) else {
             let alertController = UIAlertController(title: "Invalid Year", message:
-                "Invalid year, must be from 1800-2015", preferredStyle: UIAlertControllerStyle.Alert)
+                "Invalid year, must be from \(YearMinimum)-\(YearCurrent)", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             
@@ -262,7 +263,8 @@ class ViewController: UIViewController {
             2012: 689.9,
             2013: 700.0,
             2014: 711.4,
-            2015: 711.1
+            2015: 711.1,
+            2016: 711.1
         ]
         
         // return nil if year isn't in our CPI
