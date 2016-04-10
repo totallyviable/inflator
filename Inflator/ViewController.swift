@@ -276,14 +276,17 @@ class ViewController: UIViewController {
     }
     
     func inflate(amountPast: Double, fromYear: Int) -> Double? {
+        // get CPI for from Year
         guard let cpiPast = cpiForYear(fromYear) else {
             return nil
         }
         
+        // get CPI for current Year
         guard let cpiCurrent = cpiForYear(YearCurrent) else {
             return nil
         }
         
+        // compute inflated amount
         return amountPast * (cpiCurrent / cpiPast)
     }
 }
